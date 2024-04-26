@@ -60,16 +60,24 @@ export const SignInAsStaffScreen = ({ navigation }) => {
               Alert.alert('Please provide your Surname');
               break;
           }
-          if(!profilename.staffcode){
+          if(!profilename.staffcode && profilename.staffcode === "a12345"){
             isStaffcodeValid = false;
             Alert.alert('Please provide the Staff code');
+            break;
+          }
+          if(profilename.staffcode != "a12345"){
+            isStaffcodeValid = false;
+            Alert.alert('Valid the Staff code');
             break;
         }
         break;
       }
 
-      if(isNameValid && isStaffcodeValid){
+      if(isNameValid && isSurnameValid && isStaffcodeValid != false){
         addStaffprofile(user,userUID,profilename, success, unsuccess)
+      }
+      else{
+        console.log("Error Please Complete your Ans")
       }
     }
 

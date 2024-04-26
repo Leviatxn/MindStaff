@@ -43,7 +43,7 @@ export const LoginScreen = ({ navigation }) => {
       dispatch(setStatus(false))
       dispatch(clearProfile());
       dispatch(addProfile(userData));
-      navigation.navigate('Role')
+      navigation.navigate('Home')
   }
   
   const unsuccess = (msg) => {

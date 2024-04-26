@@ -15,7 +15,7 @@ export const HomeScreen = ({ navigation })=>{
                 onPress={goToLoginScreen}
             > 
             <View style={{flex:1, justifyContent:'center', alignItems:'center', backgroundColor:'white'}}>
-                <Image source={require('../assets/logo01.png')} style={{ width: 500, height: 500 }}/>
+                <Text style={{flex:1, justifyContent:'center', alignItems:'cente',fontfamily:'Quicksand-VariableFont_wght'}}> Hello </Text>
             </View>
             </TouchableOpacity>
         </SafeAreaView>

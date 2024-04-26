@@ -31,7 +31,7 @@ export const addStaffprofile = (user,userUID,username, success, unsuccess)=>{
     .update({
             name: username.name,
             surname : username.surname,
-            staffcode : username.staffcode,
+            personalcode : username.staffcode,
             role : "Staff"
         },
     )
@@ -53,8 +53,8 @@ export const addAdminprofile = (user,userUID,username, success, unsuccess)=>{
     .update({
             name: username.name,
             surname : username.surname,
-            staffcode : username.staffcode,
-            role : "ADmin"
+            personalcode : username.admincode,
+            role : "Admin"
         },
     )
     .then(()=>{

@@ -10,7 +10,7 @@ import { clearProfile,addProfile } from '../redux/authSlice';
 import { addAdminprofile } from '../firebase/UserModel';
 
 export const SignInAsAdminScreen = ({ navigation }) => {
-  const [profilename, setProfileName] = useState({'name':'','surname':'','staffcode':''})
+  const [profilename, setProfileName] = useState({'name':'','surname':'','admincode':''})
   const dispatch = useDispatch()     
   const user = useSelector((state)=>state.auths);
   const userUID = user[0].uid;
@@ -29,15 +29,15 @@ export const SignInAsAdminScreen = ({ navigation }) => {
         }))
     }
 
-    const setStaffcode = (text) => {
+    const setAdmincode = (text) => {
         setProfileName(oldValue => ({
           ...oldValue,
-          staffcode:text
+          admincode:text
         }))
     }
     const success = async(user) => {
       console.log("Successfully")
-      navigation.navigate('Role')
+      navigation.navigate('Home')
     }
   
     const unsuccess = (msg) => {
@@ -48,7 +48,7 @@ export const SignInAsAdminScreen = ({ navigation }) => {
     const handleLogIn = ()=>{
       let isNameValid = true;
       let isSurnameValid = true;
-      let isStaffcodeValid = true;
+      let isAdmincodeValid = true;
       while(true){
           if(!profilename.name){
             isNameValid = false;
@@ -60,17 +60,28 @@ export const SignInAsAdminScreen = ({ navigation }) => {
               Alert.alert('Please provide your Surname');
               break;
           }
-          if(!profilename.staffcode){
-            isStaffcodeValid = false;
-            Alert.alert('Please provide the Staff code');
+          if(!profilename.admincode){
+            isAdmincodeValid = false;
+            Alert.alert('Please provide the Admin code');
             break;
         }
+
+        if(profilename.admincode != "millionthedog"){
+            isAdmincodeValid = false;
+            Alert.alert('Valid the Admin code');
+            break;
+        }
+
         break;
       }
 
-      if(isNameValid && isStaffcodeValid){
+      if(isNameValid && isSurnameValid && isAdmincodeValid != false){
         addAdminprofile(user,userUID,profilename, success, unsuccess)
       }
+      else{
+        console.log("Error")
+      }
+
     }
 
     
@@ -82,7 +93,7 @@ export const SignInAsAdminScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={{flex:8}}>
-    <LinearGradient  start={{x: 0.8, y: 0.4}} end={{x: 0, y: 1}} colors={['#F5F5F5', '#7CEBDE']} style={{flex:7}}>
+    <LinearGradient  start={{x: 0.8, y: 0.4}} end={{x: 0, y: 1}} colors={['#F5F5F5', '#1B8E81']} style={{flex:7}}>
       <View style={styles.container}>
          <Text style={{fontSize:17, color:'#0D433D ', fontFamily: 'Quicksand-Medium'}}> Welcome to our team!  </Text>
          <Text style={{fontSize:20, color:'#0D433D ', fontFamily: 'Quicksand-Regular'}}> Please enter your name</Text>
@@ -102,10 +113,10 @@ export const SignInAsAdminScreen = ({ navigation }) => {
                     >
                   </TextInput>
                   <View style={{paddingVertical:'2%'}}></View>
-                  <Text style={{fontSize:17, color:'#0D433D ',fontFamily: 'Quicksand-Bold'}}>* Staff code </Text>
+                  <Text style={{fontSize:17, color:'#0D433D ',fontFamily: 'Quicksand-Bold'}}>* Admin code </Text>
                   <TextInput style={{height:50,width:320, backgroundColor:'#ffffff', borderWidth:1.5, borderRadius:25,borderColor:'#B7221E'}} 
-                    placeholder='  Staffcode*' placeholderTextColor="rgba(0, 0, 0, 0.3)" keyboardType='default' underlineColor='transparent' activeUnderlineColor="transparent" cursorColor="gray"                  
-                    value={profilename.staffcode} onChangeText={(text)=>{setStaffcode(text)}}
+                    placeholder='  Admincode*' placeholderTextColor="rgba(0, 0, 0, 0.3)" keyboardType='default' underlineColor='transparent' activeUnderlineColor="transparent" cursorColor="gray"                  
+                    value={profilename.admincode} onChangeText={(text)=>{setAdmincode(text)}}
                     >
                   </TextInput>
 

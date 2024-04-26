@@ -10,6 +10,7 @@ import {HomeScreen } from './src/screens/HomeScreen';
 import { RoleSelectScreen } from './src/screens/RoleSelectScreen';
 import { Provider } from 'react-redux';
 import { store } from './src/redux/store';
+import { SignInAsAdminScreen } from './src/screens/SignInAsAdmin';
 
 
 
@@ -36,6 +37,12 @@ export default function App() {
             <Stack.Screen 
             name="SignInAsStaff" 
             component={SignInAsStaffScreen} 
+            options={{ headerShown: false }}             
+            />
+
+            <Stack.Screen 
+            name="SignInAsAdmin" 
+            component={SignInAsAdminScreen} 
             options={{ headerShown: false }}             
             />
 

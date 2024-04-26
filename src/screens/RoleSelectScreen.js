@@ -20,7 +20,7 @@ export const RoleSelectScreen = ({ navigation }) => {
     navigation.navigate('SignInAsStaff');
   };
   const SignInasAdmin = () => {
-    navigation.navigate('Login');
+    navigation.navigate('SignInAsAdmin');
   };
 
 
