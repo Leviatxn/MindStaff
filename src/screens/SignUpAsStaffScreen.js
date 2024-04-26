@@ -7,10 +7,10 @@ import { useState } from "react";
 import { Alert } from 'react-native';
 import { useDispatch,useSelector } from 'react-redux';
 import { clearProfile,addProfile } from '../redux/authSlice';
-import { addAdminprofile } from '../firebase/UserModel';
+import { addStaffprofile } from '../firebase/UserModel';
 
-export const SignInAsAdminScreen = ({ navigation }) => {
-  const [profilename, setProfileName] = useState({'name':'','surname':'','admincode':''})
+export const SignUpAsStaffScreen = ({ navigation }) => {
+  const [profilename, setProfileName] = useState({'name':'','surname':'','staffcode':''})
   const dispatch = useDispatch()     
   const user = useSelector((state)=>state.auths);
   const userUID = user[0].uid;
@@ -29,10 +29,10 @@ export const SignInAsAdminScreen = ({ navigation }) => {
         }))
     }
 
-    const setAdmincode = (text) => {
+    const setStaffcode = (text) => {
         setProfileName(oldValue => ({
           ...oldValue,
-          admincode:text
+          staffcode:text
         }))
     }
     const success = async(user) => {
@@ -48,7 +48,7 @@ export const SignInAsAdminScreen = ({ navigation }) => {
     const handleLogIn = ()=>{
       let isNameValid = true;
       let isSurnameValid = true;
-      let isAdmincodeValid = true;
+      let isStaffcodeValid = true;
       while(true){
           if(!profilename.name){
             isNameValid = false;
@@ -60,28 +60,25 @@ export const SignInAsAdminScreen = ({ navigation }) => {
               Alert.alert('Please provide your Surname');
               break;
           }
-          if(!profilename.admincode){
-            isAdmincodeValid = false;
-            Alert.alert('Please provide the Admin code');
+          if(!profilename.staffcode && profilename.staffcode === "a12345"){
+            isStaffcodeValid = false;
+            Alert.alert('Please provide the Staff code');
+            break;
+          }
+          if(profilename.staffcode != "a12345"){
+            isStaffcodeValid = false;
+            Alert.alert('Valid the Staff code');
             break;
         }
-
-        if(profilename.admincode != "millionthedog"){
-            isAdmincodeValid = false;
-            Alert.alert('Valid the Admin code');
-            break;
-        }
-
         break;
       }
 
-      if(isNameValid && isSurnameValid && isAdmincodeValid != false){
-        addAdminprofile(user,userUID,profilename, success, unsuccess)
+      if(isNameValid && isSurnameValid && isStaffcodeValid != false){
+        addStaffprofile(user,userUID,profilename, success, unsuccess)
       }
       else{
-        console.log("Error")
+        console.log("Error Please Complete your Ans")
       }
-
     }
 
     
@@ -93,30 +90,30 @@ export const SignInAsAdminScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={{flex:8}}>
-    <LinearGradient  start={{x: 0.8, y: 0.4}} end={{x: 0, y: 1}} colors={['#F5F5F5', '#1B8E81']} style={{flex:7}}>
+    <LinearGradient  start={{x: 0.8, y: 0.4}} end={{x: 0, y: 1}} colors={['#F5F5F5', '#7CEBDE']} style={{flex:7}}>
       <View style={styles.container}>
-         <Text style={{fontSize:17, color:'#0D433D ', fontFamily: 'Quicksand-Medium'}}> Welcome to our team!  </Text>
-         <Text style={{fontSize:20, color:'#0D433D ', fontFamily: 'Quicksand-Regular'}}> Please enter your name</Text>
+         <Text style={{fontSize:17, color:"rgb(13,67,61)",fontFamily: 'Prompt-SemiBold'}}> ยินดีต้อนรับสู่ทีมของเรา !  </Text>
+         <Text style={{fontSize:20, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}> โปรดกรอกข้อมูลและรหัสสตาฟของคุณ</Text>
       </View>
       <View style={{flex:1, paddingVertical:'7%', paddingHorizontal:'10%'}}>
-              <Text style={{fontSize:17, color:'#0D433D ',fontFamily: 'Quicksand-Bold'}}> Name</Text>
+              <Text style={{fontSize:16, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}> ชื่อ (ภาษาอังกฤษ)</Text>
                   <TextInput style={{height:50,width:320, backgroundColor:'#ffffff', borderWidth:1.5, borderRadius:25,borderColor:'#B7221E'}} 
                     placeholder='  Name*' placeholderTextColor="rgba(0, 0, 0, 0.3)" keyboardType='default' underlineColor='transparent' activeUnderlineColor="transparent" cursorColor="gray"                  
                     value={profilename.name} onChangeText={(text)=>{setName(text)}}
                     >
                   </TextInput>
                   <View style={{paddingVertical:'2%'}}></View>
-                  <Text style={{fontSize:17, color:'#0D433D ',fontFamily: 'Quicksand-Bold'}}> Surname</Text>
+                  <Text style={{fontSize:16,color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}> นามสกุล (ภาษาอังกฤษ)</Text>
                   <TextInput style={{height:50,width:320, backgroundColor:'#ffffff', borderWidth:1.5, borderRadius:25,borderColor:'#B7221E'}} 
                     placeholder='  Surname*' placeholderTextColor="rgba(0, 0, 0, 0.3)" keyboardType='default' underlineColor='transparent' activeUnderlineColor="transparent" cursorColor="gray"                  
                     value={profilename.surname} onChangeText={(text)=>{setSurname(text)}}
                     >
                   </TextInput>
                   <View style={{paddingVertical:'2%'}}></View>
-                  <Text style={{fontSize:17, color:'#0D433D ',fontFamily: 'Quicksand-Bold'}}>* Admin code </Text>
+                  <Text style={{fontSize:16,color:"rgb(13,67,61)",fontFamily: 'Quicksand-SemiBold'}}>* Staff code </Text>
                   <TextInput style={{height:50,width:320, backgroundColor:'#ffffff', borderWidth:1.5, borderRadius:25,borderColor:'#B7221E'}} 
-                    placeholder='  Admincode*' placeholderTextColor="rgba(0, 0, 0, 0.3)" keyboardType='default' underlineColor='transparent' activeUnderlineColor="transparent" cursorColor="gray"                  
-                    value={profilename.admincode} onChangeText={(text)=>{setAdmincode(text)}}
+                    placeholder='  Staffcode*' placeholderTextColor="rgba(0, 0, 0, 0.3)" keyboardType='default' underlineColor='transparent' activeUnderlineColor="transparent" cursorColor="gray"                  
+                    value={profilename.staffcode} onChangeText={(text)=>{setStaffcode(text)}}
                     >
                   </TextInput>
 
@@ -124,7 +121,7 @@ export const SignInAsAdminScreen = ({ navigation }) => {
                     <TouchableOpacity style={{height:50,width:200, borderRadius:26, backgroundColor:'#B7221E', justifyContent:'center', alignItems:'center', marginHorizontal:'18%', marginVertical:'2%', borderWidth:1,borderColor:'#0D433D' }}
                              onPress={handleLogIn}                      
                      >
-                        <Text style={{fontFamily:'Quicksand-SemiBold', color:'#fffffa', fontSize:20}}>Confirm</Text>
+                        <Text style={{fontFamily: 'Prompt-Regular', color:'#fffffa', fontSize:20}}>ยืนยัน</Text>
                     </TouchableOpacity>           
                   </View>
             </View>

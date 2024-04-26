@@ -10,17 +10,16 @@ import { clearProfile,addProfile } from '../redux/authSlice';
 import { addUsername } from '../firebase/UserModel';
 
 export const RoleSelectScreen = ({ navigation }) => {
-  const [profilename, setProfileName] = useState({'name':'','surname':'','staffcode':''})
   const dispatch = useDispatch()     
   const user = useSelector((state)=>state.auths);
   const userUID = user[0].uid;
   console.log(userUID);
 
   const SignInasStaff = () => {
-    navigation.navigate('SignInAsStaff');
+    navigation.navigate('SignUpAsStaff');
   };
   const SignInasAdmin = () => {
-    navigation.navigate('SignInAsAdmin');
+    navigation.navigate('SignUpAsAdmin');
   };
 
 
@@ -29,7 +28,7 @@ export const RoleSelectScreen = ({ navigation }) => {
     <SafeAreaView style={{flex:7}}>
     <LinearGradient  start={{x: 0.9, y: 0.1}} end={{x: 0, y: 1}} colors={['#C1FCF5', '#F5F5F5']} style={{flex:7}}>
       <View style={styles.container}>
-         <Text style={{fontSize:20, color:"rgb(13,67,61)", fontFamily: 'Quicksand-SemiBold'}}> Who are you ?  </Text>
+         <Text style={{fontSize:20, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}> ตำแหน่งของคุณคือ ?  </Text>
       </View>
       <View style={{flex:1,flexDirection : 'row',paddingVertical:'5%', paddingHorizontal:'10%'}}>
 
@@ -37,7 +36,7 @@ export const RoleSelectScreen = ({ navigation }) => {
             <TouchableOpacity style={{height:200,width:180, borderRadius:26, backgroundColor:'#E32A25', justifyContent:'center', alignItems:'center', marginHorizontal:'18%', marginVertical:'2%', borderWidth:1,borderColor:'#0D433D' }}
               onPress={SignInasStaff}                       
              >
-              <Text style={{fontFamily:'Quicksand-Regular', color:'#fffffa', fontSize:20}}>Staff</Text>
+              <Text style={{fontFamily: 'Prompt-Regular', color:'#fffffa', fontSize:20}}>สตาฟ</Text>
             </TouchableOpacity>      
           </View>
 
@@ -47,7 +46,7 @@ export const RoleSelectScreen = ({ navigation }) => {
             <TouchableOpacity style={{height:200,width:180, borderRadius:26, backgroundColor:'#E32A25', justifyContent:'center', alignItems:'center', marginHorizontal:'18%', marginVertical:'2%', borderWidth:1,borderColor:'#0D433D' }}
               onPress={SignInasAdmin}                     
             >
-              <Text style={{fontFamily:'Quicksand-Regular', color:'#fffffa', fontSize:20}}>Admin</Text>
+              <Text style={{fontFamily: 'Prompt-Regular', color:'#fffffa', fontSize:20}}>แอดมิน</Text>
             </TouchableOpacity> 
           </View>
 

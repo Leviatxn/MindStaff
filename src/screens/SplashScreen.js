@@ -1,12 +1,21 @@
 import { View, Text, Image} from "react-native";
 import { SafeAreaView} from "react-native-safe-area-context";
 import { TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useEffect } from "react";
 
-export const SplashScreen = ({ navigation })=>{
+export const SplashScreen = ({})=>{
     
-    const goToLoginScreen = () => {
+    const navigation = useNavigation()
+
+    useEffect(()=>{
+        const timeout = setTimeout(navigateToLogin,2000);
+        return() => clearTimeout(timeout);
+    },[])
+
+    const navigateToLogin = () => {
         navigation.navigate('Login');
-    };
+    }
 
     return(
         <SafeAreaView style={{flex:1}}>

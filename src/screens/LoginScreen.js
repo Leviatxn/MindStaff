@@ -87,9 +87,9 @@ export const LoginScreen = ({ navigation }) => {
         <View style={{flex:2}}></View>
           
           <View style={{flex:2, paddingVertical:'7%', paddingHorizontal:'10%'}}>
-              <Text style={{fontSize:17, color:'#0D433D ',fontFamily: 'Quicksand-Bold'}}> Email</Text>
-                  <TextInput style={{height:40,width:320, backgroundColor:'#ffffff', borderWidth:1.5, borderRadius:25,borderColor:'#B7221E'}} 
-                    placeholder='Email*' placeholderTextColor="rgba(0, 0, 0, 0.3)" keyboardType='email-address' underlineColor='transparent' activeUnderlineColor="transparent" cursorColor="gray"
+              <Text style={{fontSize:17, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}> อีเมล์</Text>
+                  <TextInput style={{height:40,width:320, backgroundColor:'#ffffff', borderWidth:1.5, borderRadius:25,borderColor:'#B7221E',fontFamily: 'Prompt-Regular'}} 
+                    placeholder='   กรุณากรอกอีเมล์*' placeholderTextColor="rgba(0, 0, 0, 0.3)" keyboardType='email-address' underlineColor='transparent' activeUnderlineColor="transparent" cursorColor="gray"
                     value={credential.email} onChangeText={(text)=>{setEmail(text)}}
                     >
                   </TextInput>
@@ -98,9 +98,9 @@ export const LoginScreen = ({ navigation }) => {
 
 
             <View style={{flex:2, paddingVertical:'4%', paddingHorizontal:'10%'}}>
-                <Text style={{fontSize:17, color:'#0D433D ',fontFamily: 'Quicksand-Bold'}}> Password</Text>
-              <TextInput style={{height:40,width:320, borderRadius:25, backgroundColor:'#ffffff', borderWidth:1.5,borderColor:'#B7221E'}} 
-                    placeholder='Password*' placeholderTextColor="rgba(0, 0, 0, 0.3)" underlineColor='transparent' activeUnderlineColor="transparent" secureTextEntry={true} cursorColor="gray"
+                <Text style={{fontSize:17, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}> รหัสผ่าน</Text>
+              <TextInput style={{height:40,width:320, borderRadius:25, backgroundColor:'#ffffff', borderWidth:1.5,borderColor:'#B7221E',fontFamily: 'Prompt-Regular'}} 
+                    placeholder='   กรุณากรอกรหัสผ่าน*' placeholderTextColor="rgba(0, 0, 0, 0.3)" underlineColor='transparent' activeUnderlineColor="transparent" secureTextEntry={true} cursorColor="gray"
                     value={credential.password} onChangeText={(text)=>{setPassword(text)}}
                     >  
               </TextInput>
@@ -109,7 +109,7 @@ export const LoginScreen = ({ navigation }) => {
                             navigation.navigate('Splash');
                           }}
                     >
-                        <Text style={{fontSize:11,color:'#A9A9A9',marginTop :'3%',textDecorationLine: 'underline'}}>Forget Password?</Text>
+                        <Text style={{fontSize:11,color:'#199486',marginTop :'2%',textDecorationLine: 'underline',fontFamily: 'Prompt-Regular'}}>ลืมรหัสผ่าน?</Text>
                 </TouchableOpacity>
            
             </View>
@@ -118,7 +118,7 @@ export const LoginScreen = ({ navigation }) => {
               <TouchableOpacity style={{height:50,width:230, borderRadius:26, backgroundColor:'#27C9B6', justifyContent:'center', alignItems:'center', marginHorizontal:'18%', marginVertical:'2%', borderWidth:1,borderColor:'#0D433D' }}
                         onPress={handleSignIn}                     
                     >
-                        <Text style={{fontFamily:'Quicksand-SemiBold', color:'#fffffa', fontSize:20}}>SIGN IN</Text>
+                        <Text style={{fontFamily: 'Prompt-Regular', color:'#fffffa', fontSize:20}}>เข้าสู่ระบบ</Text>
                 </TouchableOpacity>           
             </View>
              <View style={{flex:1, paddingVertical:'15%'}}>
@@ -128,7 +128,7 @@ export const LoginScreen = ({ navigation }) => {
                             navigation.navigate("Reg");
                           }}
                     >
-                        <Text style={{fontSize:15,fontFamily : 'Quicksand-SemiBold', color:'#0D433D',marginBottom :'1%',textDecorationLine: 'underline'}}>First time user?</Text>
+                        <Text style={{fontSize:15,fontFamily: 'Prompt-Regular', color:"rgb(13,67,61)",marginBottom :'1%',textDecorationLine: 'underline'}}>สร้างบัญชีใหม่</Text>
                 </TouchableOpacity> 
             </View>
  

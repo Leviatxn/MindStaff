@@ -4,13 +4,13 @@ import { SafeAreaView } from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { LoginScreen } from './src/screens/LoginScreen';
 import { SplashScreen } from './src/screens/SplashScreen';
-import { SignInAsStaffScreen } from './src/screens/SignInAsStaffScreen';
 import { RegisterScreen } from './src/screens/RegisterScreen';
 import {HomeScreen } from './src/screens/HomeScreen';
 import { RoleSelectScreen } from './src/screens/RoleSelectScreen';
 import { Provider } from 'react-redux';
 import { store } from './src/redux/store';
-import { SignInAsAdminScreen } from './src/screens/SignInAsAdmin';
+import { SignUpAsAdminScreen } from './src/screens/SignUpAsAdmin';
+import { SignUpAsStaffScreen } from './src/screens/SignUpAsStaffScreen';
 
 
 
@@ -35,21 +35,51 @@ export default function App() {
             />
 
             <Stack.Screen 
-            name="SignInAsStaff" 
-            component={SignInAsStaffScreen} 
-            options={{ headerShown: false }}             
+            name="SignUpAsStaff" 
+            component={SignUpAsStaffScreen} 
+            options={{
+              title: 'ลงทะเบียนสตาฟ',
+              headerStyle: {            
+                backgroundColor: '#E32A25',
+                
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontFamily: 'Prompt-Regular'
+              },
+            }}            
             />
 
             <Stack.Screen 
-            name="SignInAsAdmin" 
-            component={SignInAsAdminScreen} 
-            options={{ headerShown: false }}             
+            name="SignUpAsAdmin" 
+            component={SignUpAsAdminScreen} 
+            options={{
+              title: 'ลงทะเบียนแอดมิน',
+              headerStyle: {            
+                backgroundColor: '#E32A25',
+                
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontFamily: 'Prompt-Regular'
+              },
+            }}            
             />
 
             <Stack.Screen 
             name="Reg" 
             component={RegisterScreen} 
-            options={{ headerShown: false }}             
+            options={{
+              title: 'ลงทะเบียน',
+              headerStyle: {            
+                backgroundColor: '#E32A25',
+                
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                fontFamily: 'Prompt-Regular'
+              },
+            }}            
             />
 
             <Stack.Screen

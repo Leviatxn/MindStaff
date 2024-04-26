@@ -23,6 +23,7 @@ export const addUser = (user, profile, success, unsuccess)=>{
     })
 }
 
+
 export const addStaffprofile = (user,userUID,username, success, unsuccess)=>{
     console.log(`addUsername in UserModel user id: ${userUID}`) 
     firestore()

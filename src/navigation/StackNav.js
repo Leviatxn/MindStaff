@@ -1,5 +1,5 @@
 import React from "react";
-import { HomeScreen } from "../screens/SignInAsStaffScreen";
+import { HomeScreen } from "../screens/SignUpAsStaffScreen";
 import { SplashScreen } from "../screens/SplashScreen";
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
