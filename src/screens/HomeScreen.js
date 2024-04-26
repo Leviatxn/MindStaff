@@ -4,19 +4,23 @@ import { TouchableOpacity } from "react-native"
 import { StyleSheet } from "react-native";
 import { useDispatch,useSelector } from 'react-redux';
 import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { useEffect } from "react";
 import firestore from '@react-native-firebase/firestore';
 
 
 
-export const HomeScreen =  ({ navigation })=>{
+export const HomeScreen =  ({ })=>{
     const user = useSelector((state)=>state.auths);
     const userUID = user[0].uid;
     const profile = firestore().collection('users').doc(userUID).get();
 
+    useEffect(()=>{
+        const timeout = setTimeout(handlecheckrole,1000);
+        return() => clearTimeout(timeout);
+    },[])
 
-    const goToLoginScreen = () => {
-        navigation.navigate('Login');
-    };
+
 
     const handlecheckrole = () => {
         const role = profile._j._data.role;   

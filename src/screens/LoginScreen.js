@@ -114,8 +114,8 @@ export const LoginScreen = ({ navigation }) => {
            
             </View>
             
-            <View style={{flex:1, paddingVertical:'7%', paddingHorizontal:'5%'}}>
-              <TouchableOpacity style={{height:50,width:230, borderRadius:26, backgroundColor:'#27C9B6', justifyContent:'center', alignItems:'center', marginHorizontal:'18%', marginVertical:'2%', borderWidth:1,borderColor:'#0D433D' }}
+            <View style={{flex:1, paddingVertical:'7%', justifyContent:'flex-start', alignItems:'center'}}>
+              <TouchableOpacity style={{height:50,width:200, borderRadius:26, backgroundColor:'#27C9B6', justifyContent:'center', alignItems:'center', marginHorizontal:'18%', marginVertical:'2%', borderWidth:1,borderColor:'#0D433D' }}
                         onPress={handleSignIn}                     
                     >
                         <Text style={{fontFamily: 'Prompt-Regular', color:'#fffffa', fontSize:20}}>เข้าสู่ระบบ</Text>
