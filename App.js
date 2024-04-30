@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 import { store } from './src/redux/store';
 import { SignUpAsAdminScreen } from './src/screens/SignUpAsAdmin';
 import { SignUpAsStaffScreen } from './src/screens/SignUpAsStaffScreen';
+import { StaffMainScreen } from './src/screens/Staff/StaffMainScreen';
 
 
 
@@ -94,6 +95,12 @@ export default function App() {
             component={RoleSelectScreen} 
             options={{ headerShown: false }}  
            
+            />
+
+            <Stack.Screen
+            name="StaffMain"
+            component={StaffMainScreen}
+            options={{ headerShown: false }} 
             />
             
           </Stack.Navigator>

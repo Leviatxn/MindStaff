@@ -88,12 +88,11 @@ export const LoginScreen = ({ navigation }) => {
           
           <View style={{flex:2, paddingVertical:'7%', paddingHorizontal:'10%'}}>
               <Text style={{fontSize:17, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}> อีเมล์</Text>
-                  <TextInput style={{height:40,width:320, backgroundColor:'#ffffff', borderWidth:1.5, borderRadius:25,borderColor:'#B7221E',fontFamily: 'Prompt-Regular'}} 
+              <TextInput style={{height:40,width:320, backgroundColor:'#ffffff', borderWidth:1.5, borderRadius:25,borderColor:'#B7221E',fontFamily: 'Prompt-Regular'}} 
                     placeholder='   กรุณากรอกอีเมล์*' placeholderTextColor="rgba(0, 0, 0, 0.3)" keyboardType='email-address' underlineColor='transparent' activeUnderlineColor="transparent" cursorColor="gray"
                     value={credential.email} onChangeText={(text)=>{setEmail(text)}}
                     >
                   </TextInput>
-
             </View>
 
 
@@ -123,7 +122,7 @@ export const LoginScreen = ({ navigation }) => {
             </View>
              <View style={{flex:1, paddingVertical:'15%'}}>
                 <View style={styles.line} />
-                        <TouchableOpacity style={{height:30, alignItems:'center', marginTop : '7%'}} 
+                <TouchableOpacity style={{height:30, alignItems:'center', marginTop : '7%'}} 
                         onPress={() => {
                             navigation.navigate("Reg");
                           }}

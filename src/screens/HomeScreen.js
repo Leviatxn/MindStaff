@@ -10,16 +10,15 @@ import firestore from '@react-native-firebase/firestore';
 
 
 
-export const HomeScreen =  ({ })=>{
+export const HomeScreen =  ({ navigation })=>{
     const user = useSelector((state)=>state.auths);
     const userUID = user[0].uid;
     const profile = firestore().collection('users').doc(userUID).get();
 
     useEffect(()=>{
-        const timeout = setTimeout(handlecheckrole,1000);
+        const timeout = setTimeout(handlecheckrole,2000);
         return() => clearTimeout(timeout);
     },[])
-
 
 
     const handlecheckrole = () => {
@@ -32,7 +31,7 @@ export const HomeScreen =  ({ })=>{
         }
         else if(role === 'Staff'){
             console.log('Hi Staff')
-/*             navigation.navigate('Login'); */
+             navigation.navigate('StaffMain');
         }
         else{
             console.log('Who are you')
