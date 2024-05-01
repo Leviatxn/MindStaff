@@ -12,6 +12,7 @@ import { store } from './src/redux/store';
 import { SignUpAsAdminScreen } from './src/screens/SignUpAsAdmin';
 import { SignUpAsStaffScreen } from './src/screens/SignUpAsStaffScreen';
 import { StaffMainScreen } from './src/screens/Staff/StaffMainScreen';
+import { StaffHomeScreen } from './src/screens/Staff/StaffHomeScreen';
 
 
 
@@ -98,8 +99,15 @@ export default function App() {
             />
 
             <Stack.Screen
-            name="StaffMain"
+            name="StaffMainInput"
             component={StaffMainScreen}
+            options={{ headerShown: false }} 
+            />
+
+            
+            <Stack.Screen
+            name="StaffHome"
+            component={StaffHomeScreen}
             options={{ headerShown: false }} 
             />
             

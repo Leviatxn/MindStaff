@@ -82,12 +82,37 @@ export const addAdminprofile = (user,userUID,username, success, unsuccess)=>{
     })
 }
 
+export const addStaffEvent = async(user,userUID,eventData,boothData, success, unsuccess)=>{
+    console.log(`addEvent in UserModel user id: ${userUID}`)
+    firestore()
+    .collection('users') 
+    .doc(userUID)
+    .update({
+            eventID : eventData,
+  
+            boothNum : boothData
+        },
+    )
+    .then(()=>{
+        success(user)
+    })
+    .catch((error)=>{
+      console.error(`addEvent in users collection error: ${error}`)
+      console.error(msg)
+      unsuccess(msg)
+    })
+}
+
+
 export const retrieveAllUserData = (userUID) => {
     const UserData = {
         name: "",
         surName: "",
         email: "",
         phoneNumber: "",
+        eventName:"",
+        eventID: "",
+        eventBooth:"",
         staffnumber: 0
     };
 
@@ -102,6 +127,8 @@ export const retrieveAllUserData = (userUID) => {
                 UserData.email = data.data().email
                 UserData.phoneNumber = data.data().phoneNumber
                 UserData.staffnumber = data.data().staffnumber
+                UserData.eventBooth = data.data().boothNum
+                UserData.eventID = data.data().eventID
                 return UserData;
             } else {
                 return null;
@@ -114,25 +141,19 @@ export const retrieveAllUserData = (userUID) => {
         
 };
 
-export const retrieveAllEventData = () => {
+export const retrieveAllEventData = (eventID) => {
     const EventData = {
-        event:[]
+        eventThainame:""
     };
-
+    console.log(eventID)
     return firestore()
         .collection('events')
-        .doc('eventSource')
+        .doc(eventID)
         .get()
         .then((data) => {
             if (data.exists) { 
-                const allEventData = data.data().event;
-                allEventData.forEach(element => {
-                    {
-                        EventData.event.push(element)
-                    }
-
-
-                });
+                EventData.eventThainame = data.data().eventThainame
+                console.log(EventData.eventThainame)
                 return EventData;
             } else {
                 return null;

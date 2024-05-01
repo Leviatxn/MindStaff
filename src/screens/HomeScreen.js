@@ -22,6 +22,7 @@ export const HomeScreen =  ({ navigation })=>{
 
 
     const handlecheckrole = () => {
+        const event = profile._j._data.eventID;  
         const role = profile._j._data.role;   
 /*         console.log(role);  */
         if(role === 'Admin') {
@@ -31,7 +32,12 @@ export const HomeScreen =  ({ navigation })=>{
         }
         else if(role === 'Staff'){
             console.log('Hi Staff')
-             navigation.navigate('StaffMain');
+            if(event != ""){
+                navigation.navigate('StaffHome');
+            }
+            else{
+                navigation.navigate('StaffMainInput');
+            }
         }
         else{
             console.log('Who are you')

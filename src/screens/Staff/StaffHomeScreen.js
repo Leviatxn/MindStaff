@@ -16,7 +16,7 @@ import { SelectList } from 'react-native-dropdown-select-list';
 import { addStaffEvent } from "../../firebase/UserModel";
 
 
-export const StaffMainScreen =  ({ })=>{
+export const StaffHomeScreen =  ({ })=>{
     const isUpdate = useSelector((state)=>state.variables.isUpdate);
     const user = useSelector((state)=>state.auths);
     const [selectedEvent, setEventSelected] = useState("");/// For Select list
@@ -26,7 +26,8 @@ export const StaffMainScreen =  ({ })=>{
     const [mailData, setMailData] = useState("")
     const [phoneData, setPhoneData] = useState("")
     const [staffNumData, setStaffNumData] = useState("")
-
+    const [eventNameData, setEventNameData] = useState("")
+    const [eventBoothData, setEventBoothData] = useState("")
     const [eventIDData, setEventIDData] = useState("")
     const [eventData,setEventData] = useState([]); /// For Select list
     const [showInnerComponent, setShowInnerComponent] = useState(false);/// For Select list
@@ -35,7 +36,7 @@ export const StaffMainScreen =  ({ })=>{
 
     const data = {eventData,boothData};
      useEffect(() => {  
-        getProfileData(),getEventDataArray()
+        getProfileData(),getEventDataArray() ,getEventData()
     }, [isUpdate]);  
 
     const getProfileData = async()=>{
@@ -45,25 +46,27 @@ export const StaffMainScreen =  ({ })=>{
             setMailData(itemAllUserData.email)
             setPhoneData(itemAllUserData.phoneNumber)
             setStaffNumData(itemAllUserData.staffnumber)
-
+            setEventBoothData(itemAllUserData.eventBooth)
+            setEventNameData(itemAllUserData.event)
+            setEventIDData(itemAllUserData.eventID)
             console.log(selectedEvent); 
             
         }catch (error) {
             console.error('Error getNameData:', error);
         }  
     }
-/*     const getEventData = async()=> {
+    const getEventData = async()=> {
         try{
             if(eventIDData != null && eventIDData !== undefined){
                 const allEventData = await retrieveAllEventData(eventIDData)
-                setEventNameData(allEventData.eventThainame)
                 console.log(allEventData);
+                setEventNameData(allEventData.eventThainame)
         }
 
         }catch (error) {
             console.error('Error getEventData:', error);
         }
-    } */
+    }
 
 
     const getEventDataArray = async()=>{
@@ -194,31 +197,7 @@ export const StaffMainScreen =  ({ })=>{
                     </View> 
                     
                 </View>
-                
-                <View style={{flex:2, paddingVertical:'4%', paddingHorizontal:'10%'}}>
-                <Text style={{fontSize:17, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}>   กิจกรรม</Text>
-                  <SelectList 
-                    onSelect={handleSelectData}
-                    setSelected={setEventSelected}
-                    fontFamily = 'Prompt-Regular'
-                    data={data.eventData}  
-                    boxStyles={{height:50,width:320, borderRadius:25, backgroundColor:'#F5F5F5', borderWidth:1,borderColor:'#0D433D',fontFamily: 'Prompt-Regular'}} //override default styles
-                    />
-                
-                {showInnerComponent && <InnerComponent />}
-
-                            
-                </View>
-                <View style={{flex:1,justifyContent: 'center',alignItems: 'center'}}>
-                    <TouchableOpacity style={{height:50,width:200, borderRadius:26, backgroundColor:'#B7221E', justifyContent:'center', alignItems:'center', marginHorizontal:'18%', marginVertical:'2%', borderWidth:1,borderColor:'#0D433D' }}
-                             onPress={() => {
-                                handleAddEvent();
-                                alert("Add Event Succeed");
-                    }}                 
-                     >
-                        <Text style={{fontFamily: 'Prompt-Regular', color:'#fffffa', fontSize:20}}>ยืนยัน</Text>
-                    </TouchableOpacity>           
-                  </View>
+            
             </View>
         </LinearGradient>
         </SafeAreaView>
