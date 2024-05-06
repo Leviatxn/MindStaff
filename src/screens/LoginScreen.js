@@ -105,7 +105,7 @@ export const LoginScreen = ({ navigation }) => {
               </TextInput>
               <TouchableOpacity style={{height:30, alignItems:'flex-end', marginBottom:'8%'}} 
                         onPress={() => {
-                            navigation.navigate('Splash');
+                            navigation.navigate('Role');
                           }}
                     >
                         <Text style={{fontSize:11,color:'#199486',marginTop :'2%',textDecorationLine: 'underline',fontFamily: 'Prompt-Regular'}}>ลืมรหัสผ่าน?</Text>

@@ -16,7 +16,7 @@ import { SelectList } from 'react-native-dropdown-select-list';
 import { addStaffEvent } from "../../firebase/UserModel";
 
 
-export const StaffHomeScreen =  ({ })=>{
+export const StaffHomeScreen =  ({ navigation})=>{
     const isUpdate = useSelector((state)=>state.variables.isUpdate);
     const user = useSelector((state)=>state.auths);
     const [selectedEvent, setEventSelected] = useState("");/// For Select list
@@ -33,32 +33,38 @@ export const StaffHomeScreen =  ({ })=>{
     const [showInnerComponent, setShowInnerComponent] = useState(false);/// For Select list
     const [boothData,setBoothData] = useState([]);/// For Select list
     const [FirstSelected, setFirstSelected] = useState(false)/// For Select list
-
+    const profile = firestore().collection('users').doc(userUID).get();
     const data = {eventData,boothData};
-     useEffect(() => {  
-        getProfileData(),getEventDataArray() ,getEventData()
-    }, [isUpdate]);  
+    const fetchData = async () => {
+        await getProfileData();
+        getEventData();
+      };
+      
+      useEffect(() => {
+        fetchData();
+      }, [isUpdate]);
 
     const getProfileData = async()=>{
         try{
+            
+            console.log("getProfileData")
             const itemAllUserData = await retrieveAllUserData(userUID)
             setNameData(itemAllUserData.name +" "+itemAllUserData.surName)
             setMailData(itemAllUserData.email)
             setPhoneData(itemAllUserData.phoneNumber)
             setStaffNumData(itemAllUserData.staffnumber)
             setEventBoothData(itemAllUserData.eventBooth)
-            setEventNameData(itemAllUserData.event)
             setEventIDData(itemAllUserData.eventID)
-            console.log(selectedEvent); 
             
         }catch (error) {
             console.error('Error getNameData:', error);
         }  
     }
     const getEventData = async()=> {
+        const eventID = profile._j._data.eventID;  
         try{
-            if(eventIDData != null && eventIDData !== undefined){
-                const allEventData = await retrieveAllEventData(eventIDData)
+            if(eventID != null && eventID !== undefined || eventID == eventIDData){
+                const allEventData = await retrieveAllEventData(eventID)
                 console.log(allEventData);
                 setEventNameData(allEventData.eventThainame)
         }
@@ -71,6 +77,7 @@ export const StaffHomeScreen =  ({ })=>{
 
     const getEventDataArray = async()=>{
         try{
+            console.log("getEventDataArray")
             const itemAllEventDataArray = await retrieveAllEventKeySelectData()
             setEventData(itemAllEventDataArray)
 
@@ -80,6 +87,7 @@ export const StaffHomeScreen =  ({ })=>{
     } 
     const getBoothDataArray = async()=>{
         try{
+            console.log("getBoothArray")
             const itemBoothDataArray = await retrieveboothSelectData(selectedEvent)
             setBoothData(itemBoothDataArray)
 
@@ -165,14 +173,18 @@ export const StaffHomeScreen =  ({ })=>{
         <SafeAreaView style={{flex:1}}>
         <LinearGradient start={{x: 1, y: 0.5}} end={{x: 0, y: 0.5}} colors={['#E1FAF7','#BAE9E3', '#74D4C9']} style={{flex:1}}>
             <View style={{flex:1,flexDirection : 'row',justifyContent:'flex-start',alignItems:'flex-start',marginHorizontal:'5%',marginTop:'7%'}}>
-                <View style={styles.circle}></View>
+                <View style={styles.circle}>
+                    <View style={{ width: 100,height: 100, borderRadius: 50,backgroundColor: '#FFFFFF',justifyContent:'center',alignItems:'center'}}>
+                         <Image source={require('../../assets/images/user.png')} style={{ width: 110, height: 110 }}/>
+                    </View>
+                </View>
                 <View style={{flex:1,justifyContent:'flex-start',alignItems:'flex-start',marginHorizontal:'7%',marginTop:'7%'}}>
                     <Text style={{color:"rgb(13,67,61)",justifyContent: 'flex-end', alignItems: 'center',fontFamily: 'Prompt-SemiBold',fontSize : 18}}> ยินดีต้อนรับสู่ทีมของเรา </Text>
                     <Text style={{color:"rgb(13,67,61)",justifyContent: 'flex-end', alignItems: 'center',fontFamily: 'Prompt-Regular',fontSize : 18}}> คุณ {nameData}</Text>
                 </View>
             </View>
             <View style={{flex:4,justifyContent:'flex-start', alignItems:'center', backgroundColor:'white'}}>
-                <View style={{height:'30%',width:'90%', backgroundColor:'white',borderWidth:1.5, borderRadius:25,borderColor:'#0D433D',flexDirection:'row',justifyContent: 'space-evenly',alignItems: 'center'}}> 
+                <View style={{height:'30%',width:'95%', backgroundColor:'white',borderWidth:1, borderRadius:25,borderColor:'#0D433D',flexDirection:'row',justifyContent: 'space-evenly',alignItems: 'center'}}> 
                     <View style={{flex:13,width:'60%',paddingTop:'15%'}}>
                         <Text style={{fontSize:14, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular',paddingLeft:'12%'}}>Name : {nameData}</Text>
                         <Text style={{fontSize:14, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular',paddingLeft:'12%'}}>Email : {mailData}</Text>
@@ -180,7 +192,7 @@ export const StaffHomeScreen =  ({ })=>{
                         <View style={{flex:1,justifyContent: 'center',marginHorizontal:'10%'}}>
                             <TouchableOpacity style={{height:30, alignItems:'flex-start', marginTop : '20%'}} 
                                      onPress={() => {
-                                        console.log(showInnerComponent);
+                                        console.log(eventIDData);
                             }}
                              >
                             <Text style={{fontSize:12,fontFamily: 'Prompt-Regular', color:"rgb(	38,171,156)",marginBottom :'1%',textDecorationLine: 'underline'}}>Edit profile</Text>
@@ -192,13 +204,49 @@ export const StaffHomeScreen =  ({ })=>{
                     </View>
                     <View style={{flex:9,flexDirection:'column',alignItems:'center',justifyContent:'center'}}>
                         <Text style={{fontSize:15, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}>Staff</Text>
-
                         <Text style={{fontSize:32, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}>N0.{staffNumData}</Text>
-                    </View> 
-                    
+                    </View>                  
                 </View>
-            
+                <View style={{flex:4,width:'100%', paddingVertical:'8%', paddingHorizontal:'10%',flexDirection:'row',justifyContent: 'center',alignContent : 'center'}}>
+                    <View style={{height:'70%',width:'100%', backgroundColor:'white',borderWidth:1, borderRadius:25,borderColor:'#0D433D',justifyContent: 'center',alignItems: 'center'}}> 
+                        <View style={{flex:4,justifyContent: 'center',alignItems: 'center',marginTop:'10%'}}>
+                            <Text style={{fontSize:18, color:"rgb(13,67,61)",fontFamily: 'Prompt-SemiBold'}}>กิจกรรม : </Text>
+                            <Text style={{fontSize:14, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}>{eventNameData} </Text>
+                            <View style={{width:200,height: 1,backgroundColor: '#909090',marginTop:'5%',marginBottom:'5%'}}/>
+                            <Text style={{fontSize:18, color:"rgb(13,67,61)",fontFamily: 'Prompt-Medium'}}>อยู่บูธที่ : 0{eventBoothData} </Text>
+                        </View>
+
+                        <View style={{flex:1,width:'100%',flexDirection:'column',justifyContent: 'flex-end'}}>
+                            <TouchableOpacity style={{height:30, alignItems:'flex-end', marginTop : '20%', marginRight : '5%'}} 
+                                     onPress={() => {
+                                        navigation.navigate('StaffMainInput');
+
+                            }}
+                             >
+                            <Text style={{fontSize:12,fontFamily: 'Prompt-Regular', color:"rgb(	38,171,156)",marginBottom :'1%',textDecorationLine: 'underline'}}>เปลี่ยนกิจกรรม</Text>
+                             </TouchableOpacity> 
+                        </View>
+                    </View>
+                </View> 
+
+                <View style={{height:'10%',width:'95%', borderWidth:1.5, borderTopRightRadius:35, borderTopLeftRadius:35, borderBottomRightRadius:5, borderBottomLeftRadius:5,backgroundColor:'#E32A25',borderColor:'#B7221E',justifyContent: 'center',alignItems : 'center'}}>
+                    <View style={{width: 120,height: 120,borderRadius: 100,backgroundColor: '#E32A25',borderColor:'#B7221E',marginBottom:'15%',justifyContent: 'center',alignItems : 'center'}}>
+                        <View style={{width: 105,height: 105,borderRadius: 100,backgroundColor: '#FFFFFF',borderColor:'#B7221E',justifyContent: 'center',alignItems : 'center'}}>
+                            <TouchableOpacity style={{}} 
+                                     onPress={() => {
+                                        console.log('Scan');
+                            }}
+                             >
+                                 <Image source={require('../../assets/images/qrscanner.png')} style={{ width: 80, height: 80}}/>
+                             </TouchableOpacity> 
+                        </View>
+                    </View>
+
+                </View>
+                   
             </View>
+
+                            
         </LinearGradient>
         </SafeAreaView>
     );
@@ -220,7 +268,8 @@ const styles = StyleSheet.create({
         width: 120, // Diameter of the circle
         height: 120, // Diameter of the circle
         borderRadius: 100, // Half of the width/height
-        backgroundColor: '#E32A25'
+        backgroundColor: '#E32A25',borderColor:'#B7221E'
+        ,alignItems: 'center',justifyContent :'center'
       },
     line: {
 

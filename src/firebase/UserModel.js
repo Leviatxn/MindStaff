@@ -110,7 +110,6 @@ export const retrieveAllUserData = (userUID) => {
         surName: "",
         email: "",
         phoneNumber: "",
-        eventName:"",
         eventID: "",
         eventBooth:"",
         staffnumber: 0
@@ -140,7 +139,7 @@ export const retrieveAllUserData = (userUID) => {
         });
         
 };
-
+//
 export const retrieveAllEventData = (eventID) => {
     const EventData = {
         eventThainame:""
@@ -153,7 +152,7 @@ export const retrieveAllEventData = (eventID) => {
         .then((data) => {
             if (data.exists) { 
                 EventData.eventThainame = data.data().eventThainame
-                console.log(EventData.eventThainame)
+                console.log('Hi'+EventData.eventThainame)
                 return EventData;
             } else {
                 return null;

@@ -16,7 +16,7 @@ import { SelectList } from 'react-native-dropdown-select-list';
 import { addStaffEvent } from "../../firebase/UserModel";
 
 
-export const StaffMainScreen =  ({ })=>{
+export const StaffMainScreen =  ({ navigation })=>{
     const isUpdate = useSelector((state)=>state.variables.isUpdate);
     const user = useSelector((state)=>state.auths);
     const [selectedEvent, setEventSelected] = useState("");/// For Select list
@@ -122,7 +122,7 @@ export const StaffMainScreen =  ({ })=>{
     }
     const success = async(user) => {
         console.log("Successfully")
-/*         navigation.navigate('Home') */
+            navigation.navigate('StaffHome');
       }
     
       const unsuccess = (msg) => {
@@ -161,8 +161,12 @@ export const StaffMainScreen =  ({ })=>{
     return(
         <SafeAreaView style={{flex:1}}>
         <LinearGradient start={{x: 1, y: 0.5}} end={{x: 0, y: 0.5}} colors={['#E1FAF7','#BAE9E3', '#74D4C9']} style={{flex:1}}>
-            <View style={{flex:1,flexDirection : 'row',justifyContent:'flex-start',alignItems:'flex-start',marginHorizontal:'5%',marginTop:'7%'}}>
-                <View style={styles.circle}></View>
+            <View style={{flex:1,flexDirection : 'row',justifyContent:'center',alignContent:'flex-start',marginHorizontal:'5%',marginTop:'7%'}}>
+                <View style={styles.circle}>
+                    <View style={{ width: 100,height: 100, borderRadius: 50,backgroundColor: '#FFFFFF',justifyContent:'center',alignItems:'center'}}>
+                         <Image source={require('../../assets/images/user.png')} style={{ width: 110, height: 110 }}/>
+                    </View>
+                </View>
                 <View style={{flex:1,justifyContent:'flex-start',alignItems:'flex-start',marginHorizontal:'7%',marginTop:'7%'}}>
                     <Text style={{color:"rgb(13,67,61)",justifyContent: 'flex-end', alignItems: 'center',fontFamily: 'Prompt-SemiBold',fontSize : 18}}> ยินดีต้อนรับสู่ทีมของเรา </Text>
                     <Text style={{color:"rgb(13,67,61)",justifyContent: 'flex-end', alignItems: 'center',fontFamily: 'Prompt-Regular',fontSize : 18}}> คุณ {nameData}</Text>
@@ -242,6 +246,8 @@ const styles = StyleSheet.create({
         height: 120, // Diameter of the circle
         borderRadius: 100, // Half of the width/height
         backgroundColor: '#E32A25'
+        ,justifyContent:'center',
+        alignItems:'center'
       },
     line: {
 

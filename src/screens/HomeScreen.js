@@ -41,7 +41,7 @@ export const HomeScreen =  ({ navigation })=>{
         }
         else{
             console.log('Who are you')
-/*             navigation.navigate('Login'); */
+                navigation.navigate('Role'); 
         }
     }
 

@@ -26,18 +26,19 @@ export const RoleSelectScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={{flex:7}}>
-    <LinearGradient  start={{x: 0.9, y: 0.1}} end={{x: 0, y: 1}} colors={['#C1FCF5', '#F5F5F5']} style={{flex:7}}>
+    <LinearGradient  start={{x: 0.5, y: 0.5}} end={{x: 0, y: 1}} colors={['#C1FCF5', '#F5F5F5']} style={{flex:7}}>
       <View style={styles.container}>
-         <Text style={{fontSize:20, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}> ตำแหน่งของคุณคือ ?  </Text>
+         <Text style={{fontSize:20, color:"rgb(13,67,61)",fontFamily: 'Prompt-SemiBold'}}> ตำแหน่งของคุณคือ ?  </Text>
       </View>
-      <View style={{flex:1,flexDirection : 'row',paddingVertical:'5%', paddingHorizontal:'10%'}}>
+      <View style={{flex:2,flexDirection : 'row',paddingVertical:'5%', paddingHorizontal:'10%'}}>
 
           <View style={{flex:3,justifyContent: 'flex-start',alignItems: 'center'}}>
             <TouchableOpacity style={{height:200,width:180, borderRadius:26, backgroundColor:'#E32A25', justifyContent:'center', alignItems:'center', marginHorizontal:'18%', marginVertical:'2%', borderWidth:1,borderColor:'#0D433D' }}
               onPress={SignInasStaff}                       
              >
-              <Text style={{fontFamily: 'Prompt-Regular', color:'#fffffa', fontSize:20}}>สตาฟ</Text>
-            </TouchableOpacity>      
+              <Image source={require('../assets/images/staff.png')} style={{ width: 140, height: 140 }}></Image>
+            </TouchableOpacity>     
+            <Text style={{fontSize:20, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}> สตาฟ  </Text> 
           </View>
 
           <View style={{flex:1,justifyContent: 'flex-start',alignItems: 'center'}}></View>
@@ -46,11 +47,16 @@ export const RoleSelectScreen = ({ navigation }) => {
             <TouchableOpacity style={{height:200,width:180, borderRadius:26, backgroundColor:'#E32A25', justifyContent:'center', alignItems:'center', marginHorizontal:'18%', marginVertical:'2%', borderWidth:1,borderColor:'#0D433D' }}
               onPress={SignInasAdmin}                     
             >
-              <Text style={{fontFamily: 'Prompt-Regular', color:'#fffffa', fontSize:20}}>แอดมิน</Text>
+              <Image source={require('../assets/images/admin.png')} style={{ width: 140, height: 140,marginLeft:'10%' }}></Image>
             </TouchableOpacity> 
+            <Text style={{fontSize:20, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}> แอดมิน  </Text> 
           </View>
+          
 
       </View>
+          <View style={{ flex: 1,justifyContent: 'flex-end',alignItems: 'center',backgroundColor: 'transparent'}}>
+            <Text style={{fontSize:16, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}> *กรุณาเลือกตำแหน่งของคุณ </Text>
+          </View>
       <View style={{flex:2}}></View>
 
     </LinearGradient>
@@ -61,7 +67,7 @@ export const RoleSelectScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 2,
+    flex: 3,
     justifyContent: 'flex-end',
     alignItems: 'center',
     backgroundColor: 'transparent',
