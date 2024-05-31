@@ -44,18 +44,18 @@ export const RoleSelectScreen = ({ navigation }) => {
           <View style={{flex:1,justifyContent: 'flex-start',alignItems: 'center'}}></View>
 
           <View style={{flex:3,justifyContent: 'flex-start',alignItems: 'center'}}>   
-            <TouchableOpacity style={{height:200,width:180, borderRadius:26, backgroundColor:'#E32A25', justifyContent:'center', alignItems:'center', marginHorizontal:'18%', marginVertical:'2%', borderWidth:1,borderColor:'#0D433D' }}
-              onPress={SignInasAdmin}                     
+            <TouchableOpacity style={{height:200,width:180, borderRadius:26, backgroundColor:'#B9B9B9', justifyContent:'center', alignItems:'center', marginHorizontal:'18%', marginVertical:'2%', borderWidth:1,borderColor:'#0D433D' }}
+              onPress={{}}                     
             >
-              <Image source={require('../assets/images/admin.png')} style={{ width: 140, height: 140,marginLeft:'10%' }}></Image>
+              <Image source={require('../assets/images/admin.png')} style={{ width: 140, height: 140,marginLeft:'10%' ,opacity:'10%'}}></Image>
             </TouchableOpacity> 
             <Text style={{fontSize:20, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}> แอดมิน  </Text> 
+            <Text style={{fontSize:12, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}> กรุณาลงทะเบียนในเว็บไซต์  </Text> 
           </View>
           
 
       </View>
           <View style={{ flex: 1,justifyContent: 'flex-end',alignItems: 'center',backgroundColor: 'transparent'}}>
-            <Text style={{fontSize:16, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}> *กรุณาเลือกตำแหน่งของคุณ </Text>
           </View>
       <View style={{flex:2}}></View>
 

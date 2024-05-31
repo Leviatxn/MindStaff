@@ -13,6 +13,7 @@ import { SignUpAsAdminScreen } from './src/screens/SignUpAsAdmin';
 import { SignUpAsStaffScreen } from './src/screens/SignUpAsStaffScreen';
 import { StaffMainScreen } from './src/screens/Staff/StaffMainScreen';
 import { StaffHomeScreen } from './src/screens/Staff/StaffHomeScreen';
+import { ScanScreen } from './src/screens/ScanScreen';
 
 
 
@@ -80,7 +81,7 @@ export default function App() {
               headerTintColor: '#fff',
               headerTitleStyle: {
                 fontFamily: 'Prompt-Regular'
-              },
+              },headerTitleAlign: 'center',
             }}            
             />
 
@@ -109,6 +110,23 @@ export default function App() {
             name="StaffHome"
             component={StaffHomeScreen}
             options={{ headerShown: false }} 
+            />
+
+            <Stack.Screen
+            name = "Scan"
+            component={ScanScreen}
+            options={{
+              title: 'แสกนลงทะเบียน',
+              headerStyle: {       
+                flex: 1,     
+                backgroundColor: '#E32A25',
+              },
+              headerTintColor: '#fff',
+              headerTitleStyle: {
+                flex: 1,
+                fontFamily: 'Prompt-Regular',
+              },headerTitleAlign: 'center',
+            }} 
             />
             
           </Stack.Navigator>

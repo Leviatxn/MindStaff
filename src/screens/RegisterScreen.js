@@ -56,7 +56,7 @@ export const RegisterScreen = ({ navigation }) => {
         dispatch(clearProfile());
         dispatch(addProfile(userData));
         Alert.alert(`${email} has been added to system`)
-        navigation.navigate('Role')
+        navigation.navigate('SignUpAsStaff')
     }
 
     const unsuccess = (msg) => {

@@ -52,18 +52,6 @@ export const StaffMainScreen =  ({ navigation })=>{
             console.error('Error getNameData:', error);
         }  
     }
-/*     const getEventData = async()=> {
-        try{
-            if(eventIDData != null && eventIDData !== undefined){
-                const allEventData = await retrieveAllEventData(eventIDData)
-                setEventNameData(allEventData.eventThainame)
-                console.log(allEventData);
-        }
-
-        }catch (error) {
-            console.error('Error getEventData:', error);
-        }
-    } */
 
 
     const getEventDataArray = async()=>{
@@ -71,13 +59,14 @@ export const StaffMainScreen =  ({ navigation })=>{
             const itemAllEventDataArray = await retrieveAllEventKeySelectData()
             setEventData(itemAllEventDataArray)
 
+
         }catch (error) {
             console.error('Error getNameData:', error);
         }  
     } 
     const getBoothDataArray = async()=>{
         try{
-            const itemBoothDataArray = await retrieveboothSelectData(selectedEvent)
+            const itemBoothDataArray = await retrieveboothSelectData(selectedEvent,false)
             setBoothData(itemBoothDataArray)
 
         }catch (error) {

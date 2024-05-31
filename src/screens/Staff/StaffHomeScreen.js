@@ -10,17 +10,17 @@ import firestore from '@react-native-firebase/firestore';
 import { LinearGradient } from 'react-native-linear-gradient';
 import { retrieveAllUserData } from "../../firebase/UserModel";
 import { retrieveAllEventKeySelectData } from "../../firebase/UserModel";
+import { clearStaffEventCount } from "../../firebase/UserModel";
 import { retrieveAllEventData } from "../../firebase/UserModel";
 import { retrieveboothSelectData } from "../../firebase/UserModel";
 import { SelectList } from 'react-native-dropdown-select-list';
+import { deleteUserIDFromStaff} from "../../firebase/UserModel";
 import { addStaffEvent } from "../../firebase/UserModel";
 
 
 export const StaffHomeScreen =  ({ navigation})=>{
     const isUpdate = useSelector((state)=>state.variables.isUpdate);
     const user = useSelector((state)=>state.auths);
-    const [selectedEvent, setEventSelected] = useState("");/// For Select list
-    const [selectedBooth, setBoothSelected] = useState("");/// For Select list
     const userUID = user[0].uid;
     const [nameData, setNameData] = useState("")
     const [mailData, setMailData] = useState("")
@@ -29,13 +29,12 @@ export const StaffHomeScreen =  ({ navigation})=>{
     const [eventNameData, setEventNameData] = useState("")
     const [eventBoothData, setEventBoothData] = useState("")
     const [eventIDData, setEventIDData] = useState("")
-    const [eventData,setEventData] = useState([]); /// For Select list
-    const [showInnerComponent, setShowInnerComponent] = useState(false);/// For Select list
-    const [boothData,setBoothData] = useState([]);/// For Select list
-    const [FirstSelected, setFirstSelected] = useState(false)/// For Select list
+    const [isRefreshing, setIsRefreshing] = useState(false);
+
     const profile = firestore().collection('users').doc(userUID).get();
-    const data = {eventData,boothData};
+
     const fetchData = async () => {
+        setIsRefreshing(true);
         await getProfileData();
         getEventData();
       };
@@ -60,6 +59,20 @@ export const StaffHomeScreen =  ({ navigation})=>{
             console.error('Error getNameData:', error);
         }  
     }
+
+    const clearStaffcurrentEvent = async()=>{
+        const eventID = profile._j._data.eventID;
+        try{
+            if(eventID != null && eventID !== undefined || eventID == eventIDData){
+                deleteUserIDFromStaff(eventID,userUID)
+                clearStaffEventCount(eventID)
+            }
+        }
+        catch (error) {
+            console.error('Error clearStaffcurrentEvent:', error);
+        }
+    }
+
     const getEventData = async()=> {
         const eventID = profile._j._data.eventID;  
         try{
@@ -73,99 +86,6 @@ export const StaffHomeScreen =  ({ navigation})=>{
             console.error('Error getEventData:', error);
         }
     }
-
-
-    const getEventDataArray = async()=>{
-        try{
-            console.log("getEventDataArray")
-            const itemAllEventDataArray = await retrieveAllEventKeySelectData()
-            setEventData(itemAllEventDataArray)
-
-        }catch (error) {
-            console.error('Error getNameData:', error);
-        }  
-    } 
-    const getBoothDataArray = async()=>{
-        try{
-            console.log("getBoothArray")
-            const itemBoothDataArray = await retrieveboothSelectData(selectedEvent)
-            setBoothData(itemBoothDataArray)
-
-        }catch (error) {
-            console.error('Error getNameData:', error);
-        }  
-    }
-
-    const InnerComponent  = ({}) => {
-        let oldselectedBooth = "";
-        let count = 0;
-        if(selectedBooth != ""){
-            oldselectedBooth = selectedBooth;
-            console.log('Old : '+oldselectedBooth)
-            if(oldselectedBooth = selectedBooth && count != 0){
-                console.log('Equal')
-            }
-        }
-        
-            return(
-                <View>
-                    <Text style={{fontSize:17, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular',paddingTop:'8%'}}>   บูธ</Text>
-                    <SelectList 
-                    onSelect={() => alert(selectedBooth)}
-                     setSelected={setBoothSelected}
-                     fontFamily = 'Prompt-Regular'
-                     data={data.boothData}  
-                    search={false} 
-                    boxStyles={{height:50,width:320, borderRadius:25, backgroundColor:'#F5F5F5', borderWidth:1,borderColor:'#0D433D',fontFamily: 'Prompt-Regular'}} //override default styles
-                     />  
-    
-                </View>
-            ) 
-    }
-
-    const handleSelectData = () => {
-        getBoothDataArray();
-        console.log(selectedEvent)
-        if(FirstSelected === false) {
-            setShowInnerComponent(true);
-            setFirstSelected(true);
-        }
-    }
-    const success = async(user) => {
-        console.log("Successfully")
-/*         navigation.navigate('Home') */
-      }
-    
-      const unsuccess = (msg) => {
-        console.log(msg)
-        Alert.alert(msg)
-      }
-
-    const handleAddEvent = ()=>{
-        let isEventValid = true;
-        let isBoothValid = true;
-        while(true){
-            if(!eventData){
-                isEventValid = false;
-                Alert.alert('Please Select your event');
-                break;
-            }
-            if(!boothData){
-                isBoothValid = false;
-                Alert.alert('Please Select your booth');
-                break;
-            }        
-          break;
-        }
-  
-        if(isEventValid && isBoothValid ){
-            addStaffEvent(user,userUID,selectedEvent,selectedBooth,success,unsuccess )
-            
-        }
-        else{
-          console.log("Error Please Complete your Ans")
-        }
-    }  
 
       
 
@@ -185,19 +105,10 @@ export const StaffHomeScreen =  ({ navigation})=>{
             </View>
             <View style={{flex:4,justifyContent:'flex-start', alignItems:'center', backgroundColor:'white'}}>
                 <View style={{height:'30%',width:'95%', backgroundColor:'white',borderWidth:1, borderRadius:25,borderColor:'#0D433D',flexDirection:'row',justifyContent: 'space-evenly',alignItems: 'center'}}> 
-                    <View style={{flex:13,width:'60%',paddingTop:'15%'}}>
+                    <View style={{flex:13,width:'60%',paddingTop:'1%'}}>
                         <Text style={{fontSize:14, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular',paddingLeft:'12%'}}>Name : {nameData}</Text>
                         <Text style={{fontSize:14, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular',paddingLeft:'12%'}}>Email : {mailData}</Text>
                         <Text style={{fontSize:14, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular',paddingLeft:'12%'}}>Phone : {phoneData}</Text>
-                        <View style={{flex:1,justifyContent: 'center',marginHorizontal:'10%'}}>
-                            <TouchableOpacity style={{height:30, alignItems:'flex-start', marginTop : '20%'}} 
-                                     onPress={() => {
-                                        console.log(eventIDData);
-                            }}
-                             >
-                            <Text style={{fontSize:12,fontFamily: 'Prompt-Regular', color:"rgb(	38,171,156)",marginBottom :'1%',textDecorationLine: 'underline'}}>Edit profile</Text>
-                             </TouchableOpacity> 
-                        </View>
                     </View> 
                     <View style={{flex:1,width:'10%',alignItems:'flex-end',justifyContent:'center'}}>
                         <View style={{height:'90%',width: 1,backgroundColor: '#909090'}}/>
@@ -209,7 +120,17 @@ export const StaffHomeScreen =  ({ navigation})=>{
                 </View>
                 <View style={{flex:4,width:'100%', paddingVertical:'8%', paddingHorizontal:'10%',flexDirection:'row',justifyContent: 'center',alignContent : 'center'}}>
                     <View style={{height:'70%',width:'100%', backgroundColor:'white',borderWidth:1, borderRadius:25,borderColor:'#0D433D',justifyContent: 'center',alignItems: 'center'}}> 
-                        <View style={{flex:4,justifyContent: 'center',alignItems: 'center',marginTop:'10%'}}>
+                        <View style={{flex:1,width:'100%',flexDirection:'row',justifyContent: 'flex-start'}}>
+                            <TouchableOpacity style={{height:30, marginTop : '5%', marginLeft : '5%'}} 
+                                     onPress={() => {
+                                        fetchData();
+
+                            }}
+                             >
+                                <Image source={require('../../assets/images/refresh.png')} style={{ width: 25, height: 25 }}/>
+                             </TouchableOpacity> 
+                        </View>
+                        <View style={{flex:4,justifyContent: 'center',alignItems: 'center'}}>
                             <Text style={{fontSize:18, color:"rgb(13,67,61)",fontFamily: 'Prompt-SemiBold'}}>กิจกรรม : </Text>
                             <Text style={{fontSize:14, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}>{eventNameData} </Text>
                             <View style={{width:200,height: 1,backgroundColor: '#909090',marginTop:'5%',marginBottom:'5%'}}/>
@@ -219,12 +140,14 @@ export const StaffHomeScreen =  ({ navigation})=>{
                         <View style={{flex:1,width:'100%',flexDirection:'column',justifyContent: 'flex-end'}}>
                             <TouchableOpacity style={{height:30, alignItems:'flex-end', marginTop : '20%', marginRight : '5%'}} 
                                      onPress={() => {
+                                        clearStaffcurrentEvent();
                                         navigation.navigate('StaffMainInput');
 
                             }}
                              >
                             <Text style={{fontSize:12,fontFamily: 'Prompt-Regular', color:"rgb(	38,171,156)",marginBottom :'1%',textDecorationLine: 'underline'}}>เปลี่ยนกิจกรรม</Text>
                              </TouchableOpacity> 
+
                         </View>
                     </View>
                 </View> 
@@ -234,7 +157,7 @@ export const StaffHomeScreen =  ({ navigation})=>{
                         <View style={{width: 105,height: 105,borderRadius: 100,backgroundColor: '#FFFFFF',borderColor:'#B7221E',justifyContent: 'center',alignItems : 'center'}}>
                             <TouchableOpacity style={{}} 
                                      onPress={() => {
-                                        console.log('Scan');
+                                        navigation.navigate('Scan');
                             }}
                              >
                                  <Image source={require('../../assets/images/qrscanner.png')} style={{ width: 80, height: 80}}/>

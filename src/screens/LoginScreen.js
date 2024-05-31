@@ -103,13 +103,13 @@ export const LoginScreen = ({ navigation }) => {
                     value={credential.password} onChangeText={(text)=>{setPassword(text)}}
                     >  
               </TextInput>
-              <TouchableOpacity style={{height:30, alignItems:'flex-end', marginBottom:'8%'}} 
+{/*               <TouchableOpacity style={{height:30, alignItems:'flex-end', marginBottom:'8%'}} 
                         onPress={() => {
                             navigation.navigate('Role');
                           }}
                     >
                         <Text style={{fontSize:11,color:'#199486',marginTop :'2%',textDecorationLine: 'underline',fontFamily: 'Prompt-Regular'}}>ลืมรหัสผ่าน?</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
            
             </View>
             
