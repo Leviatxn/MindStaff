@@ -154,6 +154,65 @@ export const addStaffEventCount = async (eventIDdata) => {
     }
 };
 
+export const addParticipantCount = async (eventIDdata) => {
+    console.log(`addParticipantCount in participant event id: ${eventIDdata}`);
+    // ดึงข้อมูล participants จาก Firestore
+    const docRef = firestore().collection('participants').doc(eventIDdata);
+    try {
+        const doc = await docRef.get();
+        if (doc.exists) {
+            const data = doc.data();
+            const currentCount = data.participantsCount || 0;
+
+            // อัพเดต participantsCount ใน Firestore
+            await docRef.update({
+                participantsCount: currentCount + 1
+            });
+
+            console.log('participantsCount updated successfully');
+        } else {
+            console.error('Event document not found!');
+        }
+    } catch (error) {
+        console.error(`Error updating participantsCount: ${error}`);
+    }
+};
+
+export const addParticipantCountSrc = async (eventIDdata) => {
+    console.log(`addStaffCount in UserModel event id: ${eventIDdata}`);
+    // ดึงข้อมูล events จาก Firestore
+    const docRef = firestore().collection('events').doc('eventSource');
+    try {
+        const doc = await docRef.get();
+        if (doc.exists) {
+            const eventData = doc.data();
+            const eventArray = eventData.eventArray || [];
+            
+            // หา Event ที่มี eventID ตรงกับ eventIDdata
+            const updatedEventArray = eventArray.map(event => {
+                if (event.eventID === eventIDdata) {
+                    return {
+                        ...event,
+                        participantsCount: (event.participantsCount || 0) + 1
+                    };
+                }
+                return event;
+            });
+
+            // อัพเดต eventArray ใน Firestore
+            await docRef.update({
+                eventArray: updatedEventArray
+            });
+            await setStaffCount(eventIDdata, updatedEventArray.find(event => event.eventID === eventIDdata).StaffCount);
+            console.log('addParticipantCountSrc updated successfully');
+        } else {
+            console.error('Event document not found!');
+        }
+    } catch (error) {
+        console.error(`Error updating StaffCount: ${error}`);
+    }
+};
+
 
 export const clearStaffEventCount = async (eventIDdata) => {
     console.log(`clearStaffEventCount in UserModel event id: ${eventIDdata}`);
@@ -200,6 +259,7 @@ export const addParticipant = async(participantProfile,eventID,timeData)=>{
 
     const boothDataArray = await retrieveboothSelectData(eventID);
     const boothCount = boothDataArray.length - 1;
+
     console.log('addPar'+boothCount)
     const firestoreRef = firestore();
     return firestoreRef.collection('participants').doc(eventID).get()
@@ -210,6 +270,8 @@ export const addParticipant = async(participantProfile,eventID,timeData)=>{
             const isDuplicate = participants.some(participant => participant.participantID === participantProfile.user_id);
             // ตรวจสอบว่าIDซ้ำหรือไม่
             if(!isDuplicate){//First time 
+                addParticipantCount(eventID)
+                addParticipantCountSrc(eventID)
                 const newProfile = {
                     participantID: participantProfile.user_id,
                     participantName: participantProfile.username,

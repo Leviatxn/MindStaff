@@ -77,47 +77,37 @@ export const LoginScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={{flex:1, backgroundColor:'#ffffff'}}>
       <View style={styles.container}>
-        <View style={{flex:1, justifyContent:'center', alignItems:'center', backgroundColor:'white'}}>
-              <Image source={require('../assets/logo01.png')} style={{ width: 500, height: 500 }}/>
-            </View>
+              <Image source={require('../assets/logo01.png')} style={{ width: 400, height: 400 }}/>
       </View>
 
-      <LinearGradient colors={['#BAE9E3', '#74D4C9']} style={{flex:6, borderWidth:1.5, borderRadius:25,borderColor:'#B7221E', marginHorizontal:10}}>
-
-        <View style={{flex:2}}></View>
+      <LinearGradient colors={['#BAE9E3', '#74D4C9']} style={{flex:5, borderWidth:1.5, borderRadius:25,borderColor:'#B7221E', marginHorizontal:10}}>
+        <View style={{flex:2,justifyContent:'center',alignItems: 'center'}}></View>
           
-          <View style={{flex:2, paddingVertical:'7%', paddingHorizontal:'10%'}}>
-              <Text style={{fontSize:17, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}> อีเมล์</Text>
-              <TextInput style={{height:40,width:320, backgroundColor:'#ffffff', borderWidth:1.5, borderRadius:25,borderColor:'#B7221E',fontFamily: 'Prompt-Regular'}} 
-                    placeholder='   กรุณากรอกอีเมล์*' placeholderTextColor="rgba(0, 0, 0, 0.3)" keyboardType='email-address' underlineColor='transparent' activeUnderlineColor="transparent" cursorColor="gray"
+          <View style={{flex:2, paddingVertical:'2%',justifyContent:'center',alignItems: 'center'}}>
+              <Text style={{fontSize:14, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular',alignSelf:'flex-start',marginLeft:'10%'}}> อีเมล์</Text>
+              <TextInput style={{paddingHorizontal:10,fontSize:11,height:35,width:'80%', backgroundColor:'#ffffff', borderWidth:1.5, borderRadius:25,borderColor:'#B7221E',fontFamily: 'Prompt-Regular',color: 'black'}} 
+                    placeholder='กรุณากรอกอีเมล์*' placeholderTextColor="rgba(0, 0, 0, 0.3)" keyboardType='email-address' underlineColor='transparent' activeUnderlineColor="transparent" cursorColor="gray"
                     value={credential.email} onChangeText={(text)=>{setEmail(text)}}
                     >
                   </TextInput>
             </View>
 
 
-            <View style={{flex:2, paddingVertical:'4%', paddingHorizontal:'10%'}}>
-                <Text style={{fontSize:17, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}> รหัสผ่าน</Text>
-              <TextInput style={{height:40,width:320, borderRadius:25, backgroundColor:'#ffffff', borderWidth:1.5,borderColor:'#B7221E',fontFamily: 'Prompt-Regular'}} 
-                    placeholder='   กรุณากรอกรหัสผ่าน*' placeholderTextColor="rgba(0, 0, 0, 0.3)" underlineColor='transparent' activeUnderlineColor="transparent" secureTextEntry={true} cursorColor="gray"
+            <View style={{flex:2, paddingVertical:'4%',justifyContent:'center',alignItems: 'center'}}>
+                <Text style={{fontSize:14, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular',alignSelf:'flex-start',marginLeft:'10%'}}> รหัสผ่าน</Text>
+              <TextInput style={{paddingHorizontal:10,fontSize:11,height:35,width:'80%', borderRadius:25, backgroundColor:'#ffffff', borderWidth:1.5,borderColor:'#B7221E',fontFamily: 'Prompt-Regular',color: 'black'}} 
+                    placeholder='กรุณากรอกรหัสผ่าน*' placeholderTextColor="rgba(0, 0, 0, 0.3)" underlineColor='transparent' activeUnderlineColor="transparent" secureTextEntry={true} cursorColor="gray"
                     value={credential.password} onChangeText={(text)=>{setPassword(text)}}
                     >  
               </TextInput>
-{/*               <TouchableOpacity style={{height:30, alignItems:'flex-end', marginBottom:'8%'}} 
-                        onPress={() => {
-                            navigation.navigate('Role');
-                          }}
-                    >
-                        <Text style={{fontSize:11,color:'#199486',marginTop :'2%',textDecorationLine: 'underline',fontFamily: 'Prompt-Regular'}}>ลืมรหัสผ่าน?</Text>
-                </TouchableOpacity> */}
            
             </View>
             
             <View style={{flex:1, paddingVertical:'7%', justifyContent:'flex-start', alignItems:'center'}}>
-              <TouchableOpacity style={{height:50,width:200, borderRadius:26, backgroundColor:'#27C9B6', justifyContent:'center', alignItems:'center', marginHorizontal:'18%', marginVertical:'2%', borderWidth:1,borderColor:'#0D433D' }}
+              <TouchableOpacity style={{height:40,width:150, borderRadius:26, backgroundColor:'#27C9B6', justifyContent:'center', alignItems:'center', marginHorizontal:'18%', marginVertical:'2%', borderWidth:1,borderColor:'#0D433D' }}
                         onPress={handleSignIn}                     
                     >
-                        <Text style={{fontFamily: 'Prompt-Regular', color:'#fffffa', fontSize:20}}>เข้าสู่ระบบ</Text>
+                        <Text style={{fontFamily: 'Prompt-Regular', color:'#fffffa', fontSize:17}}>เข้าสู่ระบบ</Text>
                 </TouchableOpacity>           
             </View>
              <View style={{flex:1, paddingVertical:'15%'}}>

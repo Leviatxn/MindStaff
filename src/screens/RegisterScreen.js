@@ -124,45 +124,45 @@ export const RegisterScreen = ({ navigation }) => {
       <LinearGradient  start={{x: 0.8, y: 0.4}} end={{x: 0, y: 1}} colors={['#E2FFFC', '#26AB9C']} style={{flex:1}}>
       <View style={styles.container}>
         <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
-              <Image source={require('../assets/logo01.png')} style={{ width: 400, height: 400 }}/>
+              <Image source={require('../assets/logo01.png')} style={{ width: 300, height: 300 }}/>
             </View>
       </View>
 
         <View style={{flex:8, backgroundColor:'transparent'}}>
          
-          <View style={{flex:1, paddingVertical:'5%', paddingHorizontal:'10%'}}>
-              <Text style={{fontSize:17, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}> อีเมล์</Text>
-              <TextInput style={{height:50,width:320, backgroundColor:'#ffffff', borderWidth:1.5, borderRadius:20,borderColor:'#B7221E',fontFamily: 'Prompt-Regular'}} 
+          <View style={{flex:1, paddingVertical:'5%',justifyContent:'center',alignItems: 'center'}}>
+              <Text style={{fontSize:17, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular',alignSelf:'flex-start',marginLeft:'10%'}}> อีเมล์</Text>
+              <TextInput style={{height:40,width:'80%',color: 'black', backgroundColor:'#ffffff', borderWidth:1.5, borderRadius:20,borderColor:'#B7221E',fontFamily: 'Prompt-Regular'}} 
                     placeholder='   อีเมล์ *' placeholderTextColor="rgba(0, 0, 0, 0.3)" keyboardType='email-address' underlineColor='transparent' activeUnderlineColor="transparent" cursorColor="gray" 
                     value={profile.email} onChangeText={text => setEmail(text)}
                     >
               </TextInput>
 
-              <Text style={{fontSize:17, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}> เบอร์โทรศัพท์</Text>
-              <TextInput style={{height:50,width:320, backgroundColor:'#ffffff', borderWidth:1.5, borderRadius:20,borderColor:'#B7221E',fontFamily: 'Prompt-Regular'}} 
+              <Text style={{fontSize:17, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular',alignSelf:'flex-start',marginLeft:'10%'}}> เบอร์โทรศัพท์</Text>
+              <TextInput style={{height:40,width:'80%',color: 'black', backgroundColor:'#ffffff', borderWidth:1.5, borderRadius:20,borderColor:'#B7221E',fontFamily: 'Prompt-Regular'}} 
                     placeholder='   เบอร์โทรศัพท์ *' placeholderTextColor="rgba(0, 0, 0, 0.3)" keyboardType='phone-pad' underlineColor='transparent' activeUnderlineColor="transparent" secureTextEntry={true} cursorColor="gray"
                     value={profile.phoneNumber} onChangeText={text => setPhoneNumber(text)}
                     > 
               </TextInput>
 
-              <Text style={{fontSize:17, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}> รหัสผ่าน </Text>
-              <TextInput style={{height:50,width:320, backgroundColor:'#ffffff', borderWidth:1.5, borderRadius:20,borderColor:'#B7221E',fontFamily: 'Prompt-Regular'}} 
+              <Text style={{fontSize:17, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular',alignSelf:'flex-start',marginLeft:'10%'}}> รหัสผ่าน </Text>
+              <TextInput style={{height:40,width:'80%',color: 'black', backgroundColor:'#ffffff', borderWidth:1.5, borderRadius:20,borderColor:'#B7221E',fontFamily: 'Prompt-Regular'}} 
                     placeholder='   รหัสผ่าน*' placeholderTextColor="rgba(0, 0, 0, 0.3)" underlineColor='transparent' activeUnderlineColor="transparent" secureTextEntry={true} cursorColor="gray"
                     value={profile.password} onChangeText={text => setPassword(text)}
                     > 
               </TextInput>
 
-              <Text style={{fontSize:17, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}> ยืนยันรหัสผ่าน </Text>
-              <TextInput style={{height:50,width:320, backgroundColor:'#ffffff', borderWidth:1.5, borderRadius:20,borderColor:'#B7221E',fontFamily: 'Prompt-Regular'}} 
+              <Text style={{fontSize:17, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular',alignSelf:'flex-start',marginLeft:'10%'}}> ยืนยันรหัสผ่าน </Text>
+              <TextInput style={{height:40,width:'80%',color: 'black', backgroundColor:'#ffffff', borderWidth:1.5, borderRadius:20,borderColor:'#B7221E',fontFamily: 'Prompt-Regular'}} 
                     placeholder='   ยืนยันรหัสผ่าน*' placeholderTextColor="rgba(0, 0, 0, 0.3)" underlineColor='transparent' activeUnderlineColor="transparent" secureTextEntry={true} cursorColor="gray"
                     value={profile.cfPassword} onChangeText={text => setCFPassword(text)}
                     > 
               </TextInput>
               <View style={{flex:1,justifyContent: 'center', alignItems: 'center'}}>
-              <TouchableOpacity style={{height:50,width:230, borderRadius:26, backgroundColor:'#B7221E', justifyContent:'center', alignItems:'center', marginHorizontal:'18%', marginVertical:'2%', borderWidth:1,borderColor:'#0D433D' }}
+              <TouchableOpacity style={{height:50,width:200, borderRadius:26, backgroundColor:'#B7221E', justifyContent:'center', alignItems:'center', marginHorizontal:'18%', marginVertical:'2%', borderWidth:1,borderColor:'#0D433D' }}
                       onPress={handleSignUp}
                     >
-                        <Text style={{fontFamily: 'Prompt-Regular', color:'#fffffa', fontSize:20}}>ลงทะเบียน</Text>
+                        <Text style={{fontFamily: 'Prompt-Regular', color:'#fffffa', fontSize:18}}>ลงทะเบียน</Text>
                 </TouchableOpacity>             
             </View>
           </View>          

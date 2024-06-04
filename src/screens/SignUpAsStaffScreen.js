@@ -97,21 +97,21 @@ export const SignUpAsStaffScreen = ({ navigation }) => {
       </View>
       <View style={{flex:1, paddingVertical:'7%', paddingHorizontal:'10%'}}>
               <Text style={{fontSize:16, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}> ชื่อ (ภาษาอังกฤษ)</Text>
-                  <TextInput style={{height:50,width:320, backgroundColor:'#ffffff', borderWidth:1.5, borderRadius:25,borderColor:'#B7221E'}} 
+                  <TextInput style={{height:50,width:320, backgroundColor:'#ffffff', borderWidth:1.5, borderRadius:25,borderColor:'#B7221E',color: 'black'}} 
                     placeholder='  Name*' placeholderTextColor="rgba(0, 0, 0, 0.3)" keyboardType='default' underlineColor='transparent' activeUnderlineColor="transparent" cursorColor="gray"                  
                     value={profilename.name} onChangeText={(text)=>{setName(text)}}
                     >
                   </TextInput>
                   <View style={{paddingVertical:'2%'}}></View>
                   <Text style={{fontSize:16,color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}> นามสกุล (ภาษาอังกฤษ)</Text>
-                  <TextInput style={{height:50,width:320, backgroundColor:'#ffffff', borderWidth:1.5, borderRadius:25,borderColor:'#B7221E'}} 
+                  <TextInput style={{height:50,width:320, backgroundColor:'#ffffff', borderWidth:1.5, borderRadius:25,borderColor:'#B7221E',color: 'black'}} 
                     placeholder='  Surname*' placeholderTextColor="rgba(0, 0, 0, 0.3)" keyboardType='default' underlineColor='transparent' activeUnderlineColor="transparent" cursorColor="gray"                  
                     value={profilename.surname} onChangeText={(text)=>{setSurname(text)}}
                     >
                   </TextInput>
                   <View style={{paddingVertical:'2%'}}></View>
                   <Text style={{fontSize:16,color:"rgb(13,67,61)",fontFamily: 'Quicksand-SemiBold'}}>* Staff code </Text>
-                  <TextInput style={{height:50,width:320, backgroundColor:'#ffffff', borderWidth:1.5, borderRadius:25,borderColor:'#B7221E'}} 
+                  <TextInput style={{height:50,width:320, backgroundColor:'#ffffff', borderWidth:1.5, borderRadius:25,borderColor:'#B7221E',color: 'black'}} 
                     placeholder='  Staffcode*' placeholderTextColor="rgba(0, 0, 0, 0.3)" keyboardType='default' underlineColor='transparent' activeUnderlineColor="transparent" cursorColor="gray"                  
                     value={profilename.staffcode} onChangeText={(text)=>{setStaffcode(text)}}
                     >

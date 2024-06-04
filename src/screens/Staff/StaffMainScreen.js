@@ -89,12 +89,14 @@ export const StaffMainScreen =  ({ navigation })=>{
                 <View>
                     <Text style={{fontSize:17, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular',paddingTop:'8%'}}>   บูธ</Text>
                     <SelectList 
-                    onSelect={() => alert(selectedBooth)}
-                     setSelected={setBoothSelected}
-                     fontFamily = 'Prompt-Regular'
-                     data={data.boothData}  
-                    search={false} 
-                    boxStyles={{height:50,width:320, borderRadius:25, backgroundColor:'#F5F5F5', borderWidth:1,borderColor:'#0D433D',fontFamily: 'Prompt-Regular'}} //override default styles
+                        style={{color: 'black'}}
+                        onSelect={() => alert(selectedBooth)}
+                        setSelected={setBoothSelected}
+                        fontFamily = 'Prompt-Regular'
+
+                        data={data.boothData}  
+                        search={false} 
+                        boxStyles={{height:50,width:320, borderRadius:25, backgroundColor:'#F5F5F5', borderWidth:1,borderColor:'#0D433D',fontFamily: 'Prompt-Regular',color: 'black'}} //override default styles
                      />  
     
                 </View>
@@ -150,47 +152,37 @@ export const StaffMainScreen =  ({ navigation })=>{
     return(
         <SafeAreaView style={{flex:1}}>
         <LinearGradient start={{x: 1, y: 0.5}} end={{x: 0, y: 0.5}} colors={['#E1FAF7','#BAE9E3', '#74D4C9']} style={{flex:1}}>
-            <View style={{flex:1,flexDirection : 'row',justifyContent:'center',alignContent:'flex-start',marginHorizontal:'5%',marginTop:'7%'}}>
+             <View style={{flex:1,flexDirection : 'row',justifyContent:'flex-start',alignItems:'flex-start',marginHorizontal:'5%',marginTop:'7%'}}>
                 <View style={styles.circle}>
-                    <View style={{ width: 100,height: 100, borderRadius: 50,backgroundColor: '#FFFFFF',justifyContent:'center',alignItems:'center'}}>
-                         <Image source={require('../../assets/images/user.png')} style={{ width: 110, height: 110 }}/>
+                    <View style={{ width: 80,height: 80, borderRadius: 50,backgroundColor: '#FFFFFF',justifyContent:'center',alignItems:'center'}}>
+                         <Image source={require('../../assets/images/user.png')} style={{ width: 90, height: 90 }}/>
                     </View>
                 </View>
                 <View style={{flex:1,justifyContent:'flex-start',alignItems:'flex-start',marginHorizontal:'7%',marginTop:'7%'}}>
-                    <Text style={{color:"rgb(13,67,61)",justifyContent: 'flex-end', alignItems: 'center',fontFamily: 'Prompt-SemiBold',fontSize : 18}}> ยินดีต้อนรับสู่ทีมของเรา </Text>
-                    <Text style={{color:"rgb(13,67,61)",justifyContent: 'flex-end', alignItems: 'center',fontFamily: 'Prompt-Regular',fontSize : 18}}> คุณ {nameData}</Text>
+                    <Text style={{color:"rgb(13,67,61)",justifyContent: 'flex-end', alignItems: 'center',fontFamily: 'Prompt-SemiBold',fontSize : 16}}> ยินดีต้อนรับสู่ทีมของเรา </Text>
+                    <Text style={{color:"rgb(13,67,61)",justifyContent: 'flex-end', alignItems: 'center',fontFamily: 'Prompt-Regular',fontSize : 16}}> คุณ {nameData}</Text>
                 </View>
             </View>
-            <View style={{flex:4,justifyContent:'flex-start', alignItems:'center', backgroundColor:'white'}}>
-                <View style={{height:'30%',width:'90%', backgroundColor:'white',borderWidth:1.5, borderRadius:25,borderColor:'#0D433D',flexDirection:'row',justifyContent: 'space-evenly',alignItems: 'center'}}> 
-                    <View style={{flex:13,width:'60%',paddingTop:'15%'}}>
-                        <Text style={{fontSize:14, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular',paddingLeft:'12%'}}>Name : {nameData}</Text>
-                        <Text style={{fontSize:14, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular',paddingLeft:'12%'}}>Email : {mailData}</Text>
-                        <Text style={{fontSize:14, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular',paddingLeft:'12%'}}>Phone : {phoneData}</Text>
-                        <View style={{flex:1,justifyContent: 'center',marginHorizontal:'10%'}}>
-                            <TouchableOpacity style={{height:30, alignItems:'flex-start', marginTop : '20%'}} 
-                                     onPress={() => {
-                                        console.log(showInnerComponent);
-                            }}
-                             >
-                            <Text style={{fontSize:12,fontFamily: 'Prompt-Regular', color:"rgb(	38,171,156)",marginBottom :'1%',textDecorationLine: 'underline'}}>Edit profile</Text>
-                             </TouchableOpacity> 
-                        </View>
+            <View style={{flex:5,justifyContent:'flex-start', alignItems:'center', backgroundColor:'white'}}>
+                <View style={{height:'30%',width:'95%', backgroundColor:'white',borderWidth:1, borderRadius:25,borderColor:'#0D433D',flexDirection:'row',justifyContent: 'space-evenly',alignItems: 'center'}}> 
+                    <View style={{flex:13,width:'60%',paddingTop:'1%'}}>
+                        <Text style={{fontSize:12, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular',paddingLeft:'12%'}}>Name : {nameData}</Text>
+                        <Text style={{fontSize:12, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular',paddingLeft:'12%'}}>Email : {mailData}</Text>
+                        <Text style={{fontSize:12, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular',paddingLeft:'12%'}}>Phone : {phoneData}</Text>
                     </View> 
                     <View style={{flex:1,width:'10%',alignItems:'flex-end',justifyContent:'center'}}>
                         <View style={{height:'90%',width: 1,backgroundColor: '#909090'}}/>
                     </View>
                     <View style={{flex:9,flexDirection:'column',alignItems:'center',justifyContent:'center'}}>
                         <Text style={{fontSize:15, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}>Staff</Text>
-
                         <Text style={{fontSize:32, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}>N0.{staffNumData}</Text>
-                    </View> 
-                    
+                    </View>                  
                 </View>
                 
                 <View style={{flex:2, paddingVertical:'4%', paddingHorizontal:'10%'}}>
                 <Text style={{fontSize:17, color:"rgb(13,67,61)",fontFamily: 'Prompt-Regular'}}>   กิจกรรม</Text>
                   <SelectList 
+                    style={{color: 'black'}}
                     onSelect={handleSelectData}
                     setSelected={setEventSelected}
                     fontFamily = 'Prompt-Regular'
@@ -231,8 +223,8 @@ const styles = StyleSheet.create({
       backgroundColor: 'transparent',
     },
     circle: {
-        width: 120, // Diameter of the circle
-        height: 120, // Diameter of the circle
+        width: 100, // Diameter of the circle
+        height: 100, // Diameter of the circle
         borderRadius: 100, // Half of the width/height
         backgroundColor: '#E32A25'
         ,justifyContent:'center',

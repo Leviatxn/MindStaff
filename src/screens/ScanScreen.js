@@ -111,28 +111,11 @@ function caesarDecipher(text, key) {
         barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
       />
 
-
       <LinearGradient start={{x: 1, y: 0}} end={{x: 1, y: 3}} colors={['#0D433D', '#7CEBDE']} style={styles.bottomContent}>
         {/* ส่วนของเนื้อหาด้านล่าง */}
         <Text style={{ fontSize: 16, color: 'white',fontFamily:'Prompt-Light' }}>แสกน QR เพื่อลงทะเบียนเด็กเข้างาน</Text>
       </LinearGradient>
-      <View style={{ position: 'absolute', top: 240, left: 70 }}>
-        <Image
-          source={require('../assets/images/qrscaning.png')} // กำหนด source ของรูปภาพที่ต้องการแสดง
-          style={styles.customMarkerImage} // กำหนดขนาดของรูปภาพ
-        />
-        <Text style={{ fontSize: 16, color: 'rgb(13,67,61)',fontFamily:'Prompt-Light' ,marginTop:10,alignSelf:'center'}}>กรุณาวาง QR code ให้อยู่ตรงกลางภาพ</Text>
-        <TouchableOpacity style={{height:40,width:100, borderRadius:26, backgroundColor:'#fffffa', justifyContent:'center', alignItems:'center',alignSelf:'center',marginTop:20, borderWidth:1,borderColor:'#0D433D' }}
-            onPress={() => {
 
-            }}                 
-          >
-          <View style={{flexDirection : 'row'}}>
-            <Image source={require('../assets/images/refresh.png')} style={{ width: 20, height: 20,marginRight:10}}/>
-            <Text style={{fontFamily: 'Prompt-Regular', color:'rgb(13,67,61)', fontSize:15}}>รีเฟรช</Text>
-          </View>
-       </TouchableOpacity>     
-      </View>
     </View>
   );
 }
@@ -162,7 +145,7 @@ const styles = StyleSheet.create({
   customMarkerImage: {
     width: 280,
     height: 280,
-    
+
   },
   dropShadow:{
     shadowColor: "#000",
